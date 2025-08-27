@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <initializer_list>
+#include <stdexcept>
 #include <cstddef>
 
 namespace lin {
