@@ -26,4 +26,38 @@ Matrix<T> Matrix<T>::transpose() const {
     return R;
 }
 
+template<class T>
+Matrix<T> Matrix<T>::operator+(const Matrix<T>& B) const {
+    if (r_ != B.r_ || c_ != B.c_) throw std::invalid_argument("Error: Matrix dimensions must agree for addition");
+    Matrix<T> R(r_, c_, T{});
+    for(size_t i = 0; i < r_ * c_; ++i){
+        R.d_[i] = d_[i] + B.d_[i];
+    }
+    return R;
+}
+
+template<class T>
+Matrix<T> Matrix<T>::operator-(const Matrix<T> & B) const {
+    if (r_ != B.r_ || c_ != B.c_) throw std::invalid_argument("Error: Matrix dimensions must agree for subtraction");
+    Matrix<T> R(r_, c_, T{});
+    for(size_t i = 0; i < r_ * c_; ++i){
+        R.d_[i] = d_[i] - B.d_[i];
+    }
+    return R;    
+}
+
+template<class T>
+Matrix<T> Matrix<T>::operator*(const Matrix<T>& B) const {
+    if (c_ != B.r_) throw std::invalid_argument("Error: Matrix dimensions must agree for multiplication");
+    Matrix<T> R(r_, B.c_, T{});
+    for(size_t i = 0; i < r_; ++i){
+        for(size_t j = 0; j < B.c_; ++j){
+            for(size_t k = 0; k < c_; ++k){
+                R(i, j) += (*this)(i, k) * B(k, j);
+            }
+        }
+    }
+    return R;
+}
+
 }

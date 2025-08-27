@@ -22,6 +22,7 @@ public:
     // CPU functions
     Matrix transpose() const;
     Matrix operator+(const Matrix& B) const;
+    Matrix operator-(const Matrix& B) const;
     Matrix operator*(const Matrix& B) const;
 
     const T* data() const { return d_.data(); }
@@ -38,4 +39,4 @@ Matrix<T> matmul(const Matrix<T>& A, const Matrix<T>& B, bool prefer_gpu = false
 
 } //namespace lin
 
-#include "Matrix.tpp"
+#include "Matrix.tpp"   
