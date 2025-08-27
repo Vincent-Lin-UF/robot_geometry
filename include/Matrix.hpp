@@ -16,8 +16,8 @@ public:
     std::size_t rows() const noexcept { return r_;}
     std::size_t cols() const noexcept { return c_;}
 
-    T& operator(std::size_t i, std::size_t j) { return d_[i * c_ + j]; }
-    const T& operator(std::size_t i, std::size_t j) const { return d_[i * c_ + j]; }
+    T& operator()(std::size_t i, std::size_t j) { return d_[i * c_ + j]; }
+    const T& operator()(std::size_t i, std::size_t j) const { return d_[i * c_ + j]; }
 
     // CPU functions
     Matrix transpose() const;

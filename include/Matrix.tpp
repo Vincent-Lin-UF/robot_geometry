@@ -9,10 +9,21 @@ Matrix<T>::Matrix(std::initializer_list<std::initializer_list<T>> init) {
     r_ = init.size();
     c_ = r_ ? init.begin()->size() : 0;
     d_.reserve(r_ * c_);
-    for (auto& row : init){
+    for (const auto& row : init){
         if (row.size() != c_) throw std::invalid_argument("Error: All rows must have the same number of columns");
         d_.insert(d_.end(), row.begin(), row.end()); 
     }
+}
+
+template<class T>
+Matrix<T> Matrix<T>::transpose() const {
+    Matrix<T> R(c_, r_, T{});
+    for(size_t i = 0; i < r_; ++i){
+        for(size_t j = 0; j < c_; ++j){
+            R(j, i) = (*this)(i, j);
+        }
+    }
+    return R;
 }
 
 }
